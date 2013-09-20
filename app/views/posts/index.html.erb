@@ -5,20 +5,21 @@
  <%= link_to 'New post', new_post_path %>
 <table>
   <tr>
+    <th>Url</th>
     <th>Title</th>
     <th>Text</th>
-    <th>Url</th>
     <th colspan="6"></th>
   </tr>
  
   <% @posts.each do |post| %>
     <tr>
+      <td><%= post.url %></td>
       <td><%= post.title %></td>
       <td><%= post.description %></td>
-      <td><%= post.url %></td>
       <td><%= link_to 'Show', post %></td>
       <td><%= link_to 'Edit', edit_post_path(post) %></td>
-      
+      <td><%= link_to 'Destroy', post_path(post),
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
 </table>
