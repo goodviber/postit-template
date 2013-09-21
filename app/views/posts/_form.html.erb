@@ -1,18 +1,4 @@
-<% if @post.errors.any? %>
-  <div class="row">
-    <div class="alert alert-error span8">
-      <div id="error_explanation">
-        <h2><%= pluralize(@post.errors.count, "error") %> prohibited
-            this post from being saved:</h2>
-        <ul>
-          <% @post.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
-<% end %>
+<%= render 'shared/errors', obj: @post %>
 
 <%= form_for @post do |f| %>
   <p>
