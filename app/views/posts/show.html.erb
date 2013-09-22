@@ -2,7 +2,7 @@
 <div class="well">
 <p>
 	<strong>Url:</strong>
-	<%= @post.url %>
+	<%= link_to @post.url, fix_url(@post.url) %>
 </p>
 
 <p>
