@@ -1,0 +1,9 @@
+<h3><%= @category.name %> posts</h3>
+
+<% @category.posts.each do |post| %>
+<ul>
+  <strong><li><%= post.url %></li></strong>
+  <li><%= post.title %></li>
+  <li><%= post.description %></li>
+</ul>
+<% end %>
