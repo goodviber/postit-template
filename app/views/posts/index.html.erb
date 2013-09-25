@@ -16,8 +16,11 @@
 	 
 	  <% @posts.each do |post| %>
 	    <tr>
-	    	<td><%= post.category_ids %></td>
-
+				<td>
+				  <% post.categories.each do |category|  %>
+				    <%= category.name %>
+				  <% end %>
+				</td>
 	      <td><%= post.url %></td>
 	      <td><%= post.title %></td>
 	      <td><%= post.description %></td>
