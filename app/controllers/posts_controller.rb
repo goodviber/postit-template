@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
 	before_action :set_post, only: [:show, :edit, :update]
+	before_action :require_user, only: [:new, :create, :edit, :update]
 
   def new
 		@post = Post.new
@@ -7,6 +8,7 @@ class PostsController < ApplicationController
 
 	def create
 	  @post = Post.new(post_params)
+	  @post.user = current_user
 	 
 	  if @post.save
 	  	flash[:notice] = "You have created a new post"

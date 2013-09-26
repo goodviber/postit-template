@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+	before_action :require_user, only: [:new, :create]
 
 	def new
 				@comment=Comment.new
@@ -9,7 +10,7 @@ class CommentsController < ApplicationController
 		@comment = Comment.new(comment_params)
 		@comment.post = @post
 
-		@comment.user_id = 1
+		@comment.user = current_user
 
 		if @comment.save
 			flash[:notice] = "You have created a comment"

@@ -21,12 +21,14 @@
 				    <%= category.name %>
 				  <% end %>
 				</td>
-	      <td><%= post.url %></td>
+	      <td><%= link_to fix_url(post.url) %></td>
 	      <td><%= post.title %></td>
 	      <td><%= post.description %></td>
 	      <td> <%= link_to 'Show', post %>&nbsp</td>
+	      <% if logged_in? %>
 	      <td> <%= link_to 'Edit', edit_post_path(post) %>&nbsp</td>
-	      <td>posted by XXX on <%= pretty_date(post.created_at) %></td>
+	      <% end %>
+	      <td>posted by <%= post.user.username %> on <%= pretty_date(post.created_at) %></td>
 	     <!-- <td><%= link_to 'Destroy', post_path(post),
 	                    method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
 	    </tr>
