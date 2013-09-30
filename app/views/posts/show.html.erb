@@ -29,8 +29,20 @@
 <br>
 <%= f.submit "Create Comment", class: 'btn btn-primary' %>
 <% end %>
-<ul>
-	<% @post.comments.each do |comment| %>
-	<li><%= comment.body %> by <%= comment.user.username %></li>
-	<% end %>
-</ul>
+
+		<% @post.comments.each do |comment| %>
+		<div class="row">
+				<div class="span0 well text-center">
+
+	   			<%= link_to "+", vote_post_comment_path(@post, comment, vote: true), method: 'post' if logged_in? %>
+					[ <%= comment.total_votes %> ]
+	   			<%= link_to "-", vote_post_comment_path(@post, comment, vote: false), method: 'post' if logged_in? %>
+	   	
+	   		</div>
+			<div class="span8 well">
+						<p>
+						<%= comment.body %> by <%= comment.user.username %>
+						</p>
+			</div>
+		</div>
+						<% end %>

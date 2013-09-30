@@ -6,8 +6,15 @@ PostitTemplate::Application.routes.draw do
   get '/logout', to: 'sessions#destroy'
   
   resources :posts do
-  	resources :comments, :only => :create
+  	member do
+  		post 'vote'
+  	end
+  	resources :comments, only: [:create, :vote] do
+  		member do
+  			post 'vote'
+  		end
+  	end
   end
   resources :users
-    resources :categories, only: [:new, :create, :show]
+  resources :categories, only: [:new, :create, :show]
 end

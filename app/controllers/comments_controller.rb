@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-	before_action :require_user, only: [:new, :create]
+	before_action :require_user, only: [:new, :create, :vote]
 
 	def new
 				@comment=Comment.new
@@ -20,6 +20,14 @@ class CommentsController < ApplicationController
 		end
 
 	end
+
+	def vote
+				@comment = Comment.find(params[:id])
+		Vote.create(vote: params[:vote], user: current_user, voteable: @comment)
+		flash[:notice] = "You have voted succesfully."
+		redirect_to request.referer
+	end
+
 
 	private
 

@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-	before_action :set_post, only: [:show, :edit, :update]
-	before_action :require_user, only: [:new, :create, :edit, :update]
+	before_action :set_post, only: [:show, :edit, :update, :vote]
+	before_action :require_user, only: [:new, :create, :edit, :update, :vote]
 
   def new
 		@post = Post.new
@@ -38,14 +38,20 @@ class PostsController < ApplicationController
 	  end
 	end
 
+	def vote
+		Vote.create(vote: params[:vote], user: current_user, voteable: @post)
+		flash[:notice] = "You have voted succesfully."
+		redirect_to root_path
+	end
+
 	def destroy
 	  @post = Post.find(params[:id])
 	  @post.destroy
 	 
 	  redirect_to posts_path
 	end
- 
-private
+
+	private
 
 	def set_post
 		@post = Post.find(params[:id])
