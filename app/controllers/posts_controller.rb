@@ -40,9 +40,16 @@ class PostsController < ApplicationController
 
 	def vote
 		Vote.create(vote: params[:vote], user: current_user, voteable: @post)
-		flash[:notice] = "You have voted succesfully."
-		redirect_to root_path
+
+		respond_to do |format|
+			format.html do
+			flash[:notice] = "You have voted succesfully."
+			redirect_to root_path
+			end
+			format.js
+		end
 	end
+
 
 	def destroy
 	  @post = Post.find(params[:id])
