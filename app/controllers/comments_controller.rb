@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
 	end
 
 	def create
-		@post = Post.find(params[:post_id])
+		@post = Post.find_by slug: params[:post_id]
 		@comment = Comment.new(comment_params)
 		@comment.post = @post
 
@@ -24,9 +24,16 @@ class CommentsController < ApplicationController
 	def vote
 				@comment = Comment.find(params[:id])
 		Vote.create(vote: params[:vote], user: current_user, voteable: @comment)
-		flash[:notice] = "You have voted succesfully."
-		redirect_to request.referer
+
+		respond_to do |format|
+			format.html do
+				flash[:notice] = "You have voted succesfully."
+				redirect_to request.referer
+			end
+			format.js
+		end
 	end
+
 
 
 	private

@@ -20,4 +20,12 @@ class ApplicationController < ActionController::Base
 			redirect_to root_path
 		end
 	end
+
+	def require_admin
+		if !logged_in? || !current_user.admin?
+			flash[:error] = "You can't do that."
+			redirect_to root_path
+		end
+	end
+
 end

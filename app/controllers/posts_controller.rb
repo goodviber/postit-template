@@ -24,6 +24,12 @@ class PostsController < ApplicationController
 
 	def index
 	  @posts = Post.all
+	  respond_to do |format|
+	  	format.html {render :index}
+	  	format.js {render json: @posts}
+	  	format.xml {render xml: @posts}
+	  	format.json {render json: @posts}
+	  end
 	end
 
 	def edit
@@ -43,8 +49,8 @@ class PostsController < ApplicationController
 
 		respond_to do |format|
 			format.html do
-			flash[:notice] = "You have voted succesfully."
-			redirect_to root_path
+				flash[:notice] = "You have voted succesfully."
+				redirect_to root_path
 			end
 			format.js
 		end
@@ -61,7 +67,7 @@ class PostsController < ApplicationController
 	private
 
 	def set_post
-		@post = Post.find(params[:id])
+		@post = Post.find_by slug: params[:id]
 	end
 
   def post_params

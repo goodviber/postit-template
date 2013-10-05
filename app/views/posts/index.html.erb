@@ -9,7 +9,7 @@
 	  		<div class="span0 well text-center">
 
 	   			<%= link_to "+", vote_post_path(post, vote: true), method: 'post', remote: true if logged_in? %>
-	   			<span id="post_<%= post.id %>_votes">[ <%= post.total_votes %> ]</span>
+	   			<span id="post_<%= post.slug %>_votes">[ <%= post.total_votes %> ]</span>
 	   			<%= link_to "-", vote_post_path(post, vote: false), method: 'post', remote: true if logged_in? %>
 	   		</div>
 	   			<div class="span8 well">

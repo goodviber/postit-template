@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+	include Voteable
 	
 	BADWORDS = ['bad','word']
 	belongs_to :user, foreign_key: :user_id
@@ -21,13 +22,15 @@ class Post < ActiveRecord::Base
 			end
 		end
 	end
-end
 
-def generate_slug
-	self.slug = self.title.gsub(' ', '-').downcase
+	def generate_slug
+		self.slug = self.title.gsub(' ', '-').downcase
 	end
 
-def to_param
-	self.slug
+	def to_param
+		self.slug
+	end
+	
 end
+
 
