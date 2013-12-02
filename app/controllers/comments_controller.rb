@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
 	before_action :require_user, only: [:new, :create, :vote]
 
 	def new
-				@comment=Comment.new
+		@comment=Comment.new
 	end
 
 	def create
