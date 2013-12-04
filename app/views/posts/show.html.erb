@@ -35,13 +35,11 @@
 				<div class="span0 well text-center">
 
 	   			<%= link_to "+", vote_post_comment_path(@post, comment, vote: true), method: 'post', remote: true if logged_in? %>
-					<span id="comment_votes">[ <%= comment.total_votes %> ]</span>
+					<span id="comment_<%= comment.id %>_votes">[ <%= comment.total_votes %> ]</span>
 	   			<%= link_to "-", vote_post_comment_path(@post, comment, vote: false), method: 'post', remote: true if logged_in? %>
 	   		</div>
 			<div class="span8 well">
-						<p>
 						<%= comment.body %> by <%= comment.user.username %>
-						</p>
 			</div>
 		</div>
 						<% end %>
